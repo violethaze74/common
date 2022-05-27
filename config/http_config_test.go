@@ -664,6 +664,7 @@ func TestTLSConfig(t *testing.T) {
 
 	// tlsConfig.rootCAs.LazyCerts contains functions getCert() in go 1.16, which are
 	// never equal. Compare the Subjects instead.
+	// nolint:staticcheck // ignoring tlsCert.RootCAs.Subjects is deprecated ERR because cert does not come from SystemCertPool.
 	if !reflect.DeepEqual(tlsConfig.RootCAs.Subjects(), expectedTLSConfig.RootCAs.Subjects()) {
 		t.Fatalf("Unexpected RootCAs result: \n\n%+v\n expected\n\n%+v", tlsConfig.RootCAs.Subjects(), expectedTLSConfig.RootCAs.Subjects())
 	}
